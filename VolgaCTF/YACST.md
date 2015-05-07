@@ -2,6 +2,7 @@
 
 **Category:** PPC & Recon 
 **Points:** 200
+
 **Description:**
 
  Try to solve another captcha - [server](http://yacst.2015.volgactf.ru/)
@@ -14,9 +15,9 @@ For brevity's sake I started exploring other possible solutions, and after looki
 
 Enter fuzzy hashing.
 
-After downloading all of them into a directory along with a test sample `captcha.wav`, and trimming off the noise (basically just rstrip/lstrip for \x00`), I used the ssdeep module to generate a fuzzy hash of each number.
+After downloading all of the samples into a directory along with a test sample `captcha.wav`, and trimming off the noise (basically just `rstrip`/`lstrip` for `\x00`), I used the [ssdeep](https://pypi.python.org/pypi/ssdeep) module to generate a fuzzy hash of each number, and made sure that the test sample was able to be parsed properly.
 
-From there it was a simple matter of taking in the WAV file, dividing it by 6 (even though the file sizes for each sample differed, it was good enough), and comparing each parsed number with the fuzzy hashes we already had. If it matched with 75% certianty it was probably a match. It solved each captcha extremely quickly and had 5 solved in no time (and was a LOT easier than configuring Sphinx ;)).
+From there it was a simple matter of taking in the WAV file, dividing it by 6 (even though the file sizes for each sample differed, it was good enough), and comparing each parsed number with the fuzzy hashes I already had. If it matched with 75% certianty it was probably a match. It solved each captcha extremely quickly and had 5 solved in no time (and was a LOT easier than configuring Sphinx ;)).
 
 ```python
 import ssdeep
