@@ -10,6 +10,8 @@
 
 ---
 
+As we started looking at this I said maybe the dumbest thing I could have. 
+
 >Oh this is just a simple format string vuln 
 
 Protip: NEVER say these words during a CTF
@@ -56,7 +58,7 @@ I strip this awful symbol
 
 What!? That wasn't in the strings. What is going on here?
 
-![](pwnie_ida.png)
+![](img/pwnie_ida.png)
 
 Ahh, clever girl. They're looking for `0x6e` (the `n` character) in the received buffer, and uses an asm string push to echo out the string, bypassing the vulnerable call to sprintf! Bastards.
 
@@ -68,13 +70,13 @@ After scratching my head for a bit I realized that this was a vulnerable call to
 
 Looking over the code, we want to clobber the RET that's used during an exit/failure condition, mostly because 1.) we have a few different writes to deal with stack cookies, and 2.) we can't reach any earlier RET pointers :).
 
-![](pwnie_ida2.png)
+![](img/pwnie_ida2.png)
 
 ##Clobbering RET
 
 The RET in question is at `0x8048b23`, so we set a breakpoint there and trigger it by sending `exit\n`
 
-![](pwnie_memory.png)
+![](img/pwnie_memory.png)
 
 The pointer it's jumping to is `0x8048e23` which is located at the stack address `0xbfffefcc`. Referencing our old stack dump that's located as argument #32. At this point it's just a matter of writing enough bytes to overflow, then clobbering `0x8048e23` to our own location.
 
@@ -131,7 +133,7 @@ loop_4:
 
 After combining the above, we now have a very stable exploit that works regardless of file descriptor location, and the inability for us to write memory locations with `%n`!
 
-![](pwnie_exploit.png)
+![](img/pwnie_exploit.png)
 
 ```python
 import socket
