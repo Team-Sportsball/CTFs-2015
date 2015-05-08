@@ -3,6 +3,8 @@
 **Category:** PPC & Recon 
 **Points:** 200
 
+**Solved by:** [@Fitblip](https://github.com/fitblip)
+
 **Description:**
 
  Try to solve another captcha - [server](http://yacst.2015.volgactf.ru/)
