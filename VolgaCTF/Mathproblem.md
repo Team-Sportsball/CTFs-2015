@@ -3,7 +3,7 @@
 **Category:** PPC 
 **Points:** 300
 
-**Solved by:** @Fitblip
+**Solved by:** [@Fitblip](https://github.com/fitblip)
 
 **Description:**
 
