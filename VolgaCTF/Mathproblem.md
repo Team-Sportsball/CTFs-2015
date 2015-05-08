@@ -3,6 +3,8 @@
 **Category:** PPC 
 **Points:** 300
 
+**Solved by:** @Fitblip
+
 **Description:**
 
  `nc mathproblem.2015.volgactf.ru 8888`
